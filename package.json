@@ -1,0 +1,15 @@
+{
+  "name": "grabb",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Grabb — grab, archive, and diff any public web page offline",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "playwright-core": "^1.64.0"
+  }
+}
