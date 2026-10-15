@@ -2,3 +2,4 @@ node_modules/
 exports/
 *.log
 .env
+*.bak
