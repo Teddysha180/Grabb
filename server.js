@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const EXPORTS_DIR = path.join(__dirname, 'exports');
 
-const USER_AGENT = 'Grabb-OfflineArchiver/2.0 (public offline copy; no access bypass)';
+const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36';
 const REQUEST_TIMEOUT_MS = 15000;
 const MEDIA_REQUEST_TIMEOUT_MS = 120000;
 const HTML_MAX_BYTES = 10 * 1024 * 1024;
@@ -162,14 +162,28 @@ async function safeFetch(raw, base, manifest, kind = 'resource') {
   const redirects = [];
 
   for (let i = 0; i < 8; i++) {
+    const isDoc = kind === 'html' || kind === 'page';
+    const fetchHeaders = {
+      'user-agent': USER_AGENT,
+      'accept': isDoc
+        ? 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8'
+        : (kind === 'stylesheet' ? 'text/css,*/*;q=0.1' : (kind === 'script' ? '*/*' : '*/*')),
+      'accept-language': 'en-US,en;q=0.9',
+      'referer': base || current.href,
+      'sec-ch-ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+      'sec-ch-ua-mobile': '?0',
+      'sec-ch-ua-platform': '"Windows"',
+      'sec-fetch-dest': isDoc ? 'document' : (kind === 'stylesheet' ? 'style' : (kind === 'script' ? 'script' : 'empty')),
+      'sec-fetch-mode': isDoc ? 'navigate' : 'cors',
+      'sec-fetch-site': 'same-origin',
+      'upgrade-insecure-requests': isDoc ? '1' : undefined
+    };
+
     const response = await fetch(current.href, {
       redirect: 'manual',
       signal: AbortSignal.timeout(kind === 'media' || kind === 'media segment' || kind === 'media playlist'
         ? MEDIA_REQUEST_TIMEOUT_MS : REQUEST_TIMEOUT_MS),
-      headers: {
-        'user-agent': USER_AGENT,
-        accept: '*/*'
-      }
+      headers: fetchHeaders
     });
 
     if ([301, 302, 303, 307, 308].includes(response.status)) {
@@ -887,8 +901,7 @@ async function tryRenderWithPlaywright(url, outputDir, manifest) {
     const context = await browser.newContext({
       userAgent: USER_AGENT,
       ignoreHTTPSErrors: true,
-      viewport: { width: 1440, height: 900 },
-      extraHTTPHeaders: { 'Accept': '*/*' }
+      viewport: { width: 1440, height: 900 }
     });
     const page = await context.newPage();
 
@@ -1196,38 +1209,79 @@ async function extractWebsite(targetUrl, onProgress = () => {}) {
 
   onProgress({ phase: 'connecting', message: 'Connecting to target website...' });
   const target = await validateUrl(targetUrl);
-  const initial = await safeFetch(target.href, target.href, manifest, 'html');
-  manifest.redirects.push(...initial.redirects);
-  const response = initial.response;
-  const contentType = response.headers.get('content-type') || '';
-  if (!response.ok) throw new Error(`Target returned HTTP ${response.status} ${response.statusText}`);
-  if (!/text\/html|application\/xhtml\+xml/i.test(contentType)) {
-    throw new Error(`URL did not return HTML (content-type: ${contentType || 'unknown'}).`);
-  }
+  let htmlBuffer;
+  let html;
+  let finalUrl = target.href;
+  let rendered = null;
+  let responseStatus = 200;
+  let responseStatusText = 'OK';
 
-  const htmlBuffer = await readLimited(response, HTML_MAX_BYTES);
-  const html = htmlBuffer.toString('utf8');
-  const finalUrl = initial.finalUrl;
-  manifest.archivedPages.push({ url: target.href, finalUrl, localPath: 'offline-ready-copy/index.html', status: response.status });
-  manifest.responses.push({ url: finalUrl, status: response.status, statusText: response.statusText, contentType, bytes: htmlBuffer.length });
+  try {
+    const initial = await safeFetch(target.href, target.href, manifest, 'html');
+    manifest.redirects.push(...initial.redirects);
+    const response = initial.response;
+    responseStatus = response.status;
+    responseStatusText = response.statusText;
+    const contentType = response.headers.get('content-type') || '';
+    if (!response.ok) throw new Error(`Target returned HTTP ${response.status} ${response.statusText}`);
+    if (!/text\/html|application\/xhtml\+xml/i.test(contentType)) {
+      throw new Error(`URL did not return HTML (content-type: ${contentType || 'unknown'}).`);
+    }
 
-  onProgress({ phase: 'fetched', message: `Fetched main page (${Math.round(htmlBuffer.length / 1024)} KB)`, bytes: htmlBuffer.length });
-  await fs.writeFile(path.join(originalDir, 'index.html'), htmlBuffer);
-  await fs.writeFile(path.join(originalDir, 'response-headers.json'), JSON.stringify({
-    url: finalUrl,
-    status: response.status,
-    statusText: response.statusText,
-    headers: headersToObject(response.headers)
-  }, null, 2));
+    htmlBuffer = await readLimited(response, HTML_MAX_BYTES);
+    html = htmlBuffer.toString('utf8');
+    finalUrl = initial.finalUrl;
+    manifest.archivedPages.push({ url: target.href, finalUrl, localPath: 'offline-ready-copy/index.html', status: responseStatus });
+    manifest.responses.push({ url: finalUrl, status: responseStatus, statusText: responseStatusText, contentType, bytes: htmlBuffer.length });
 
-  onProgress({ phase: 'rendering', message: 'Attempting browser rendering (Playwright)...' });
-  const rendered = await tryRenderWithPlaywright(finalUrl, outputDir, manifest);
-  if (rendered) {
-    await makeDirsForFile(rendered.path);
-    await fs.writeFile(rendered.path, rendered.html, 'utf8');
-    onProgress({ phase: 'rendered', message: 'Browser-rendered DOM captured' });
-  } else {
-    onProgress({ phase: 'rendered', message: 'Playwright not available, using static HTML' });
+    onProgress({ phase: 'fetched', message: `Fetched main page (${Math.round(htmlBuffer.length / 1024)} KB)`, bytes: htmlBuffer.length });
+    await fs.writeFile(path.join(originalDir, 'index.html'), htmlBuffer);
+    await fs.writeFile(path.join(originalDir, 'response-headers.json'), JSON.stringify({
+      url: finalUrl,
+      status: responseStatus,
+      statusText: responseStatusText,
+      headers: headersToObject(response.headers)
+    }, null, 2));
+
+    onProgress({ phase: 'rendering', message: 'Attempting browser rendering (Playwright)...' });
+    rendered = await tryRenderWithPlaywright(finalUrl, outputDir, manifest);
+    if (rendered) {
+      await makeDirsForFile(rendered.path);
+      await fs.writeFile(rendered.path, rendered.html, 'utf8');
+      onProgress({ phase: 'rendered', message: 'Browser-rendered DOM captured' });
+    } else {
+      onProgress({ phase: 'rendered', message: 'Playwright not available, using static HTML' });
+    }
+  } catch (fetchErr) {
+    // If standard fetch was blocked or challenged (e.g. HTTP 403 Forbidden, 401, 503, or bot challenge):
+    // Seamlessly fall back to Headless Chrome via Playwright!
+    onProgress({ phase: 'rendering', message: 'Standard request challenged (Cloudflare/WAF) — Launching Headless Chrome browser...' });
+    rendered = await tryRenderWithPlaywright(target.href, outputDir, manifest);
+
+    if (rendered && rendered.html && rendered.html.length > 200) {
+      html = rendered.html;
+      htmlBuffer = Buffer.from(html, 'utf8');
+      finalUrl = rendered.finalUrl || target.href;
+      responseStatus = rendered.status || 200;
+      responseStatusText = 'OK (Chrome Rendered)';
+
+      manifest.archivedPages.push({ url: target.href, finalUrl, localPath: 'offline-ready-copy/index.html', status: responseStatus });
+      manifest.responses.push({ url: finalUrl, status: responseStatus, statusText: responseStatusText, contentType: 'text/html', bytes: htmlBuffer.length });
+
+      onProgress({ phase: 'fetched', message: `Captured via Headless Chrome (${Math.round(htmlBuffer.length / 1024)} KB)`, bytes: htmlBuffer.length });
+      await fs.writeFile(path.join(originalDir, 'index.html'), htmlBuffer);
+      await fs.writeFile(path.join(originalDir, 'response-headers.json'), JSON.stringify({
+        url: finalUrl,
+        status: responseStatus,
+        statusText: responseStatusText,
+        headers: { 'content-type': 'text/html', 'x-rendered-by': 'Playwright/Chrome' }
+      }, null, 2));
+      await makeDirsForFile(rendered.path);
+      await fs.writeFile(rendered.path, rendered.html, 'utf8');
+      onProgress({ phase: 'rendered', message: 'Browser-rendered DOM captured via Chrome engine' });
+    } else {
+      throw fetchErr;
+    }
   }
 
   const queue = [];
@@ -1551,8 +1605,8 @@ async function extractWebsite(targetUrl, onProgress = () => {}) {
     id,
     targetUrl: target.href,
     finalUrl,
-    status: response.status,
-    statusText: response.statusText,
+    status: responseStatus,
+    statusText: responseStatusText,
     originalHtml: html,
     offlineHtml,
     renderedHtml: rendered ? rendered.html : '',
@@ -1663,10 +1717,20 @@ app.get('/api/live-proxy', async (req, res) => {
   if (!targetUrl) return res.status(400).send('Missing url');
   try {
     const validated = await validateUrl(targetUrl);
-    const fetched = await safeFetch(validated.href, validated.href, null, 'html');
-    const response = fetched.response;
-
-    const html = await response.text();
+    let html = '';
+    try {
+      const fetched = await safeFetch(validated.href, validated.href, null, 'html');
+      if (!fetched.response.ok) throw new Error(`HTTP ${fetched.response.status}`);
+      html = await fetched.response.text();
+    } catch {
+      const dummyManifest = { skipped: [], failed: [], apiRequests: [], failedBrowserRequests: [] };
+      const rendered = await tryRenderWithPlaywright(validated.href, EXPORTS_DIR, dummyManifest);
+      if (rendered && rendered.html) {
+        html = rendered.html;
+      } else {
+        throw new Error('Target website blocked automated access and browser fallback was unavailable');
+      }
+    }
     const baseTag = `<base href="${validated.href}">
 <script>
   window.addEventListener('scroll', function() {

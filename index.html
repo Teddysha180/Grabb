@@ -51,6 +51,12 @@
       --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       
       --spring-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+
+      /* ═══ Modern Bold Black Cursor System ═══ */
+      --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M3 2L3 19.5L7.8 15.2L11.5 22.5L14.2 21.1L10.5 14.1H16.8L3 2Z' fill='%23000000' stroke='%23ffffff' stroke-width='1.8' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E") 3 2, auto;
+      --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Cpath d='M8.5 2C7.67 2 7 2.67 7 3.5V13.2L5.85 12.05C5.26 11.46 4.31 11.46 3.73 12.05C3.14 12.64 3.14 13.59 3.73 14.17L9.2 19.64C10.33 20.77 11.86 21.41 13.45 21.41H17.5C19.43 21.41 21 19.84 21 17.91V11C21 10.17 20.33 9.5 19.5 9.5C19.36 9.5 19.23 9.52 19.1 9.57C18.85 8.94 18.23 8.5 17.5 8.5C17.34 8.5 17.19 8.53 17.04 8.58C16.77 7.93 16.14 7.5 15.4 7.5C15.27 7.5 15.14 7.52 15.02 7.56V4C15.02 3.17 14.35 2.5 13.52 2.5C12.69 2.5 12.02 3.17 12.02 4V8.5H10.5V3.5C10.5 2.67 9.83 2 9 2H8.5Z' fill='%23000000' stroke='%23ffffff' stroke-width='1.8' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E") 8 2, pointer;
+      --cursor-grab: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M9 4C8.45 4 8 4.45 8 5V11H7C6.45 11 6 11.45 6 12C6 15.31 8.69 18 12 18H14C17.31 18 20 15.31 20 12V6C20 5.45 19.55 5 19 5C18.45 5 18 5.45 18 6V10H16.5V4C16.5 3.45 16.05 3 15.5 3C14.95 3 14.5 3.45 14.5 4V10H13V3C13 2.45 12.55 2 12 2C11.45 2 11 2.45 11 3V10H9.5V4Z' fill='%23000000' stroke='%23ffffff' stroke-width='1.8' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E") 12 12, grab;
+      --cursor-grabbing: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M8 9C8 8.45 8.45 8 9 8H15C15.55 8 16 8.45 16 9V11H17C17.55 11 18 11.45 18 12V14C18 16.21 16.21 18 14 18H10C7.79 18 6 16.21 6 14V11C6 10.45 6.45 10 7 10H8V9Z' fill='%23000000' stroke='%23ffffff' stroke-width='1.8' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E") 12 12, grabbing;
     }
 
     * {
@@ -59,6 +65,121 @@
       padding: 0;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+    }
+
+    html, body {
+      cursor: var(--cursor-default);
+    }
+
+    /* Modern bold black pointer on all interactive elements */
+    a,
+    button,
+    [role="button"],
+    [role="tab"],
+    [role="switch"],
+    input[type="button"],
+    input[type="submit"],
+    input[type="reset"],
+    input[type="checkbox"],
+    input[type="radio"],
+    select,
+    label,
+    summary,
+    .preset-chip,
+    .tab-btn,
+    .btn,
+    .btn-submit,
+    .btn-action,
+    .brand,
+    .chip,
+    .clickable,
+    .card-clickable,
+    .tab,
+    .switch,
+    .nav-link,
+    .history-card,
+    .history-row,
+    .diff-item,
+    .slider-handle {
+      cursor: var(--cursor-pointer) !important;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    input[type="search"],
+    input[type="number"],
+    input[type="password"],
+    textarea {
+      cursor: text;
+    }
+
+    /* ═══ Dynamic RGB Chromatic & Watery Glitch Engine ═══ */
+    @property --rgb-angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    @keyframes rgbSpin {
+      0% { --rgb-angle: 0deg; }
+      100% { --rgb-angle: 360deg; }
+    }
+
+    @keyframes rgbFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ═══ Refined Liquid Chromatic & Watery Glass Engine ═══ */
+    @keyframes wateryShimmer {
+      0%, 100% {
+        opacity: 0.85;
+        filter: drop-shadow(0 0 12px rgba(41, 151, 255, 0.25));
+      }
+      50% {
+        opacity: 1;
+        filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.35)) drop-shadow(0 0 8px rgba(255, 0, 119, 0.2));
+      }
+    }
+
+    /* Refined Ambient RGB Cursor Halo (Subtle & Non-Intrusive) */
+    .cursor-rgb-halo {
+      position: fixed;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999999;
+      transform: translate(-50%, -50%) scale(0.2);
+      opacity: 0;
+      background: conic-gradient(
+        from var(--rgb-angle, 0deg),
+        rgba(255, 0, 85, 0.65),
+        rgba(255, 136, 0, 0.65),
+        rgba(0, 255, 128, 0.65),
+        rgba(0, 212, 255, 0.65),
+        rgba(157, 0, 255, 0.65),
+        rgba(255, 0, 85, 0.65)
+      );
+      filter: blur(8px);
+      animation: rgbSpin 3.5s linear infinite;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      mix-blend-mode: screen;
+    }
+
+    .cursor-rgb-halo.active {
+      opacity: 0.55;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* Completely hide halo over inputs so text is 100% crisp & unobstructed */
+    body:has(.command-box:hover) .cursor-rgb-halo,
+    body:has(.command-input:focus) .cursor-rgb-halo,
+    .command-box:hover ~ .cursor-rgb-halo,
+    .hero-form:hover ~ .cursor-rgb-halo {
+      opacity: 0 !important;
+      visibility: hidden !important;
     }
 
     body {
@@ -107,52 +228,52 @@
     }
 
     .orb-1 {
-      width: 600px;
-      height: 600px;
-      top: -100px;
-      left: 10%;
-      background: radial-gradient(circle, rgba(94, 92, 230, 0.3) 0%, transparent 70%);
-      animation-duration: 26s;
+      width: 650px;
+      height: 650px;
+      top: -120px;
+      left: 15%;
+      background: radial-gradient(circle, rgba(140, 180, 255, 0.14) 0%, rgba(100, 140, 240, 0.04) 50%, transparent 70%);
+      animation-duration: 28s;
     }
 
     .orb-2 {
-      width: 500px;
-      height: 500px;
-      top: 200px;
-      right: 5%;
-      background: radial-gradient(circle, rgba(30, 215, 96, 0.18) 0%, transparent 70%);
-      animation-duration: 20s;
-      animation-delay: -8s;
+      width: 550px;
+      height: 550px;
+      top: 220px;
+      right: 8%;
+      background: radial-gradient(circle, rgba(180, 220, 255, 0.10) 0%, rgba(130, 170, 230, 0.03) 50%, transparent 70%);
+      animation-duration: 24s;
+      animation-delay: -10s;
     }
 
     .orb-3 {
-      width: 450px;
-      height: 450px;
-      bottom: 100px;
-      left: 30%;
-      background: radial-gradient(circle, rgba(41, 151, 255, 0.15) 0%, transparent 70%);
-      animation-duration: 28s;
-      animation-delay: -14s;
+      width: 500px;
+      height: 500px;
+      bottom: 80px;
+      left: 25%;
+      background: radial-gradient(circle, rgba(160, 195, 255, 0.08) 0%, transparent 70%);
+      animation-duration: 32s;
+      animation-delay: -16s;
     }
 
     @keyframes floatOrb {
       0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(40px, 25px) scale(1.08); }
-      100% { transform: translate(-30px, -20px) scale(0.94); }
+      50% { transform: translate(30px, 20px) scale(1.06); }
+      100% { transform: translate(-25px, -15px) scale(0.96); }
     }
 
-    /* Interactive Mouse Spotlight */
+    /* Interactive Liquid Glass Specular Spotlight */
     .mouse-spotlight {
       position: fixed;
-      width: 600px;
-      height: 600px;
+      width: 640px;
+      height: 640px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(30, 215, 96, 0.06) 0%, rgba(94, 92, 230, 0.03) 40%, transparent 70%);
-      filter: blur(60px);
+      background: radial-gradient(circle, rgba(225, 242, 255, 0.07) 0%, rgba(140, 190, 255, 0.025) 45%, transparent 70%);
+      filter: blur(50px);
       pointer-events: none;
       z-index: 1;
       transform: translate(-50%, -50%);
-      transition: opacity 0.3s ease;
+      transition: opacity 0.4s ease;
       opacity: 0;
     }
 
@@ -198,52 +319,101 @@
       gap: 12px;
       text-decoration: none;
       color: var(--text);
+      position: relative;
     }
 
     .brand-logo {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.03) 100%), rgba(10, 12, 22, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-      transition: all 0.3s var(--spring-smooth);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+      transition: all 0.35s var(--spring-smooth);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
+    /* Refined RGB Border Aura on Logo Hover */
     .brand-logo::before {
       content: '';
       position: absolute;
       inset: -50%;
-      background: conic-gradient(from 0deg, transparent, rgba(30, 215, 96, 0.3), transparent 60%);
-      animation: rotateBorder 6s linear infinite;
+      background: conic-gradient(
+        from var(--rgb-angle, 0deg),
+        rgba(255, 0, 85, 0.8),
+        rgba(255, 120, 0, 0.8),
+        rgba(0, 255, 102, 0.8),
+        rgba(0, 212, 255, 0.8),
+        rgba(157, 0, 255, 0.8),
+        rgba(255, 0, 85, 0.8)
+      );
+      animation: rgbSpin 3s linear infinite;
       opacity: 0;
       transition: opacity 0.3s ease;
+      filter: blur(4px);
     }
 
     .brand:hover .brand-logo::before {
-      opacity: 1;
+      opacity: 0.75;
     }
 
-    .brand-logo svg {
-      width: 18px;
-      height: 18px;
-      fill: none;
-      stroke: #ffffff;
-      stroke-width: 2.2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      position: relative;
+    .brand-logo .logo-inner-glass {
+      position: absolute;
+      inset: 1.5px;
+      background: rgba(10, 12, 22, 0.9);
+      border-radius: 10px;
       z-index: 1;
-      transition: stroke 0.3s ease;
+      transition: background 0.3s ease;
     }
 
-    .brand:hover .brand-logo svg {
-      stroke: var(--spotify-green);
+    .brand:hover .brand-logo .logo-inner-glass {
+      background: rgba(8, 10, 18, 0.8);
+    }
+
+    /* Grabb Claw Logo SVG */
+    .brand-logo .grabb-logo-svg {
+      width: 25px;
+      height: 25px;
+      position: relative;
+      z-index: 2;
+      transition: transform 0.3s var(--spring-smooth), filter 0.3s ease;
+    }
+
+    .brand:hover .brand-logo .grabb-logo-svg {
+      transform: scale(1.06);
+      filter: drop-shadow(-1.5px 0 3px rgba(0, 240, 255, 0.7)) drop-shadow(1.5px 0 3px rgba(255, 0, 119, 0.65));
+    }
+
+    /* Subtle Cyan & Magenta Glitch Chromatic Ghosts */
+    .brand-logo .glitch-layer {
+      opacity: 0;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .brand:hover .brand-logo .glitch-cyan {
+      opacity: 0.65;
+      transform: translate(-1px, 0);
+    }
+
+    .brand:hover .brand-logo .glitch-magenta {
+      opacity: 0.65;
+      transform: translate(1px, 0);
+    }
+
+    .brand:hover .brand-logo {
+      border-color: rgba(0, 212, 255, 0.4);
+      box-shadow: 
+        0 6px 24px rgba(0, 0, 0, 0.7),
+        0 0 18px rgba(0, 212, 255, 0.25),
+        0 0 28px rgba(255, 0, 100, 0.15);
     }
 
     .brand-info {
@@ -334,36 +504,44 @@
       position: relative;
     }
 
-    /* Apple-style floating badge */
+    /* Liquid Glass floating badge */
     .hero-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 6px 16px;
+      padding: 6px 18px;
       border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.02) 100%);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.02em;
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255, 255, 255, 0.92);
       margin-bottom: 24px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s var(--spring-smooth);
+      box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.35),
+        0 8px 24px rgba(0, 0, 0, 0.35);
+      transition: all 0.35s var(--spring-smooth);
     }
 
     .hero-pill:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.18);
-      transform: translateY(-1px);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%);
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.5),
+        0 12px 28px rgba(0, 0, 0, 0.4),
+        0 0 24px rgba(255, 0, 128, 0.35),
+        0 0 45px rgba(0, 220, 255, 0.28);
+      transform: translateY(-2px);
     }
 
     .hero-pill svg {
       width: 14px;
       height: 14px;
-      fill: var(--spotify-green);
+      fill: #ffffff;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.5));
     }
 
     /* Epic Title - Pure Apple / Spotify Impact */
@@ -378,10 +556,27 @@
     }
 
     .hero-heading .gradient-text {
-      background: linear-gradient(135deg, #ffffff 20%, #a1a1c2 60%, #5e5ce6 100%);
+      background: linear-gradient(
+        125deg,
+        #ffffff 0%,
+        #eef4ff 18%,
+        #ffffff 36%,
+        #b2cbff 54%,
+        #e2c2ff 72%,
+        #ffffff 90%,
+        #c6deff 100%
+      );
+      background-size: 240% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
+      animation: liquidTextShine 8s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+      filter: drop-shadow(0 0 28px rgba(180, 215, 255, 0.18));
+    }
+
+    @keyframes liquidTextShine {
+      0% { background-position: 0% center; }
+      100% { background-position: 100% center; }
     }
 
     .hero-sub {
@@ -418,35 +613,58 @@
 
     .pipeline-line {
       flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.05));
+      height: 1.5px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
       position: relative;
       z-index: 0;
+      overflow: hidden;
+      border-radius: 99px;
     }
 
+    .pipeline-line::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(220, 240, 255, 0.95), transparent);
+      animation: pipelinePhoton 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes pipelinePhoton {
+      0% { transform: translateX(-150%); opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { transform: translateX(350%); opacity: 0; }
+    }
+
+    /* Liquid Glass Pipeline Tiles */
     .icon-node {
       width: 50px;
       height: 50px;
       border-radius: var(--radius-md);
-      background: rgba(18, 19, 29, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%), rgba(12, 14, 24, 0.7);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.16);
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       z-index: 2;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      box-shadow: 
+        0 10px 28px rgba(0, 0, 0, 0.5),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.35);
       transition: all 0.4s var(--spring-smooth);
     }
 
     #node-stack {
-      border-color: rgba(41, 151, 255, 0.25);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(41, 151, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.22);
     }
 
     #node-stack svg {
-      stroke: var(--apple-blue);
+      stroke: rgba(220, 235, 255, 0.9);
     }
 
     .icon-node svg {
@@ -461,32 +679,41 @@
     }
 
     .icon-node.active, .icon-node:hover {
-      border-color: rgba(41, 151, 255, 0.5);
+      border-color: rgba(255, 255, 255, 0.5);
       transform: translateY(-2px) scale(1.08);
-      box-shadow: 0 12px 30px rgba(41, 151, 255, 0.35), 0 0 20px rgba(41, 151, 255, 0.3);
+      box-shadow: 
+        0 14px 36px rgba(0, 0, 0, 0.6),
+        0 0 28px rgba(255, 0, 128, 0.4),
+        0 0 48px rgba(0, 220, 255, 0.35),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.6);
     }
 
     .icon-node.active svg, .icon-node:hover svg {
       stroke: #ffffff;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
     }
 
     #node-shield {
-      border-color: rgba(30, 215, 96, 0.25);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(30, 215, 96, 0.15);
+      border-color: rgba(255, 255, 255, 0.22);
     }
 
     #node-shield svg {
-      stroke: var(--spotify-green);
+      stroke: rgba(220, 235, 255, 0.9);
     }
 
     #node-shield.active, #node-shield:hover {
-      border-color: rgba(30, 215, 96, 0.5);
+      border-color: rgba(255, 255, 255, 0.5);
       transform: translateY(-2px) scale(1.08);
-      box-shadow: 0 12px 30px rgba(30, 215, 96, 0.35), 0 0 20px rgba(30, 215, 96, 0.3);
+      box-shadow: 
+        0 14px 36px rgba(0, 0, 0, 0.6),
+        0 0 28px rgba(255, 0, 128, 0.4),
+        0 0 48px rgba(0, 220, 255, 0.35),
+        inset 0 1.5px 1px rgba(255, 255, 255, 0.6);
     }
 
     #node-shield.active svg, #node-shield:hover svg {
       stroke: #ffffff;
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
     }
 
     .center-wrapper {
@@ -501,13 +728,18 @@
       width: 62px;
       height: 62px;
       border-radius: 18px;
-      background: linear-gradient(135deg, rgba(32, 34, 52, 0.95) 0%, rgba(14, 15, 24, 0.95) 100%);
-      backdrop-filter: blur(24px);
-      border: 1px solid rgba(191, 90, 242, 0.35);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%), rgba(14, 16, 28, 0.8);
+      backdrop-filter: blur(32px) saturate(210%);
+      -webkit-backdrop-filter: blur(32px) saturate(210%);
+      border: 1px solid rgba(255, 255, 255, 0.26);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(94, 92, 230, 0.3);
+      box-shadow: 
+        0 16px 42px rgba(0, 0, 0, 0.65),
+        0 0 28px rgba(180, 215, 255, 0.15),
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.5),
+        inset 0 -1.5px 2px rgba(0, 0, 0, 0.4);
       transition: all 0.4s var(--spring-smooth);
       position: relative;
     }
@@ -517,10 +749,10 @@
       position: absolute;
       inset: -2px;
       border-radius: 18px;
-      background: linear-gradient(135deg, rgba(94, 92, 230, 0.5), rgba(30, 215, 96, 0.5));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(180, 215, 255, 0.1));
       z-index: -1;
-      opacity: 0.4;
-      filter: blur(4px);
+      opacity: 0.3;
+      filter: blur(6px);
       transition: opacity 0.4s ease;
     }
 
@@ -532,7 +764,7 @@
       stroke-width: 2.2;
       stroke-linecap: round;
       stroke-linejoin: round;
-      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
     }
 
     .splash {
@@ -568,26 +800,106 @@
       align-items: center;
       gap: 12px;
       padding: 8px 10px 8px 20px;
-      background: rgba(18, 19, 29, 0.7);
-      backdrop-filter: blur(32px) saturate(190%);
-      -webkit-backdrop-filter: blur(32px) saturate(190%);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%), rgba(10, 12, 22, 0.65);
+      backdrop-filter: blur(40px) saturate(210%) brightness(108%);
+      -webkit-backdrop-filter: blur(40px) saturate(210%) brightness(108%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: var(--radius-full);
       box-shadow: 
-        0 20px 50px rgba(0, 0, 0, 0.6),
-        0 0 0 1px rgba(255, 255, 255, 0.05),
-        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        0 24px 60px -10px rgba(0, 0, 0, 0.75),
+        0 0 0 1px rgba(255, 255, 255, 0.06),
+        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.38),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.45),
+        0 0 35px rgba(180, 215, 255, 0.06);
       transition: all 0.35s var(--spring-smooth);
       position: relative;
+      overflow: hidden;
+    }
+
+    /* Dynamic Cursor-Tracking Specular Glass & Refined RGB Rim */
+    .command-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: radial-gradient(
+        260px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 0.45) 0%,
+        rgba(180, 220, 255, 0.18) 35%,
+        transparent 70%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      z-index: 3;
+    }
+
+    .command-box:hover::before,
+    .command-box:focus-within::before {
+      opacity: 1;
+      background: conic-gradient(
+        from var(--rgb-angle, 0deg) at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        #ff0055 0%,
+        #ff6600 16%,
+        #00ff77 36%,
+        #00d4ff 56%,
+        #8b00ff 76%,
+        #ff00aa 92%,
+        #ff0055 100%
+      );
+      animation: rgbSpin 3.2s linear infinite;
+    }
+
+    .command-box:hover {
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 
+        0 22px 60px rgba(0, 0, 0, 0.8),
+        0 0 24px rgba(0, 212, 255, 0.22),
+        0 0 36px rgba(255, 0, 119, 0.16),
+        inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.6),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.4);
+    }
+
+    /* Liquid Glass Specular Shimmer Wave */
+    .command-box::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        115deg,
+        transparent 35%,
+        rgba(255, 255, 255, 0.06) 45%,
+        rgba(255, 255, 255, 0.16) 50%,
+        rgba(255, 255, 255, 0.06) 55%,
+        transparent 65%
+      );
+      transform: translateX(-100%);
+      transition: transform 0.8s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .command-box:hover::after,
+    .command-box:focus-within::after {
+      transform: translateX(100%);
     }
 
     .command-box:focus-within {
-      background: rgba(22, 24, 38, 0.85);
-      border-color: rgba(30, 215, 96, 0.5);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.03) 100%), rgba(12, 14, 26, 0.8);
+      border-color: rgba(255, 255, 255, 0.45);
       box-shadow: 
-        0 24px 60px rgba(0, 0, 0, 0.7),
-        0 0 28px rgba(30, 215, 96, 0.25),
-        inset 0 1px 1px rgba(255, 255, 255, 0.25);
+        0 30px 80px rgba(0, 0, 0, 0.85),
+        0 0 45px rgba(255, 0, 128, 0.38),
+        0 0 85px rgba(0, 240, 255, 0.3),
+        inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.7),
+        inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.5);
       transform: translateY(-2px);
     }
 
@@ -595,13 +907,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--text-muted);
-      transition: color 0.3s ease;
+      color: rgba(255, 255, 255, 0.6);
+      transition: all 0.3s ease;
       flex-shrink: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .command-box:focus-within .command-icon {
-      color: var(--spotify-green);
+      color: #ffffff;
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
     }
 
     .command-icon svg {
@@ -625,10 +940,12 @@
       font-weight: 500;
       letter-spacing: -0.01em;
       min-width: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .command-input::placeholder {
-      color: var(--text-muted);
+      color: rgba(255, 255, 255, 0.4);
       font-weight: 400;
     }
 
@@ -638,53 +955,107 @@
       justify-content: center;
       padding: 4px 9px;
       border-radius: 6px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: rgba(255, 255, 255, 0.6);
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 600;
       user-select: none;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
       flex-shrink: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .command-box:focus-within .shortcut-badge {
       color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.22);
+      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.12);
     }
 
-    /* Spotify / Apple Action Button */
+    /* Liquid Glass Specular Pill Action Button with Magnetic Dynamics */
     .btn-submit {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       padding: 12px 24px;
       border-radius: var(--radius-full);
-      background: #ffffff;
-      color: #000000;
-      border: none;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(220, 235, 255, 0.88) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      color: #05060b;
+      border: 1px solid rgba(255, 255, 255, 0.95);
       font-family: var(--font-sans);
       font-size: 14px;
       font-weight: 700;
       letter-spacing: -0.01em;
       cursor: pointer;
-      box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
-      transition: all 0.3s var(--spring-smooth);
+      box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.4),
+        0 0 24px rgba(255, 255, 255, 0.28),
+        inset 0 1.5px 1px #ffffff,
+        inset 0 -1.5px 2px rgba(80, 120, 200, 0.22);
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, background 0.3s ease;
       flex-shrink: 0;
       position: relative;
       overflow: hidden;
+      z-index: 2;
+      will-change: transform;
+    }
+
+    /* Dynamic internal RGB chromatic border and specular glare */
+    .btn-submit::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: conic-gradient(
+        from var(--rgb-angle, 0deg) at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        #ff0055, #ff5500, #ffbb00, #00ff66, #00d4ff, #7a00ff, #ff00c8, #ff0055
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      animation: rgbSpin 2.4s linear infinite;
+      transition: opacity 0.3s ease;
+      z-index: 3;
+    }
+
+    .btn-submit:hover::after {
+      opacity: 1;
+    }
+
+    .btn-submit::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 100%);
+      border-radius: var(--radius-full) var(--radius-full) 0 0;
+      pointer-events: none;
     }
 
     .btn-submit:hover:not(:disabled) {
-      background: var(--spotify-green);
+      background: linear-gradient(180deg, #ffffff 0%, rgba(235, 245, 255, 0.96) 100%);
       color: #000000;
-      box-shadow: 0 6px 24px rgba(30, 215, 96, 0.4);
-      transform: scale(1.02);
+      border-color: rgba(255, 255, 255, 1);
+      box-shadow: 
+        0 14px 40px rgba(0, 0, 0, 0.6),
+        0 0 28px rgba(255, 0, 128, 0.55),
+        0 0 55px rgba(0, 229, 255, 0.45),
+        inset 0 1.5px 1px #ffffff,
+        inset 0 -1px 2px rgba(80, 120, 200, 0.15);
     }
 
     .btn-submit:active:not(:disabled) {
-      transform: scale(0.97);
+      transform: scale(0.96) !important;
     }
 
     .btn-submit:disabled {
@@ -703,7 +1074,7 @@
       stroke-linecap: round;
     }
 
-    /* Preset Chips */
+    /* Preset Liquid Glass Chips with Magnetic Physics */
     .presets-row {
       display: flex;
       align-items: center;
@@ -716,7 +1087,7 @@
     .preset-label {
       font-size: 12px;
       font-weight: 500;
-      color: var(--text-muted);
+      color: rgba(255, 255, 255, 0.5);
       margin-right: 4px;
     }
 
@@ -724,23 +1095,60 @@
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      padding: 7px 14px;
+      padding: 7px 15px;
       border-radius: var(--radius-full);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: var(--text-secondary);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 100%);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: rgba(255, 255, 255, 0.8);
       font-family: var(--font-sans);
       font-size: 12px;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.25s var(--spring-smooth);
+      box-shadow: 
+        inset 0 1px 0.5px rgba(255, 255, 255, 0.28),
+        0 4px 14px rgba(0, 0, 0, 0.3);
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      will-change: transform;
+    }
+
+    /* Dynamic cursor RGB chromatic border on chip */
+    .preset-chip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: conic-gradient(
+        from var(--rgb-angle, 0deg) at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        #ff0055, #ff7700, #ffdd00, #00ff66, #00eeff, #8800ff, #ff00aa, #ff0055
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      animation: rgbSpin 3s linear infinite;
+      transition: opacity 0.3s ease;
+      z-index: 2;
+    }
+
+    .preset-chip:hover::before {
+      opacity: 1;
     }
 
     .preset-chip:hover {
-      background: rgba(255, 255, 255, 0.09);
-      border-color: rgba(255, 255, 255, 0.2);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%);
+      border-color: rgba(255, 255, 255, 0.45);
       color: #ffffff;
-      transform: translateY(-1px);
+      box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.6),
+        0 10px 26px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(255, 0, 128, 0.4),
+        0 0 36px rgba(0, 220, 255, 0.3);
     }
 
     .preset-chip svg {
@@ -1821,6 +2229,39 @@
 </head>
 
 <body>
+  <!-- Hidden Global SVG Filters for Watery Glitch & Liquid Refraction -->
+  <svg class="svg-filters-def" aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none;">
+    <defs>
+      <!-- Fluid Watery Glitch Displacement Filter -->
+      <filter id="watery-glitch-filter" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" id="glitchTurbulence" baseFrequency="0.04 0.09" numOctaves="3" result="noise" seed="5">
+          <animate attributeName="baseFrequency" dur="2.2s" values="0.03 0.08; 0.07 0.15; 0.025 0.05; 0.08 0.12; 0.03 0.08" repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="8.5" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+      </filter>
+
+      <!-- Soft Caustic Water Ripple Filter -->
+      <filter id="watery-ripple-filter" x="-25%" y="-25%" width="150%" height="150%">
+        <feTurbulence type="turbulence" id="rippleTurbulence" baseFrequency="0.025 0.05" numOctaves="2" result="ripple" seed="8">
+          <animate attributeName="baseFrequency" dur="3.2s" values="0.02 0.04; 0.04 0.075; 0.018 0.035; 0.02 0.04" repeatCount="indefinite" />
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="ripple" scale="12" xChannelSelector="B" yChannelSelector="R" />
+      </filter>
+
+      <!-- Grabb Brand Gradient Definitions -->
+      <linearGradient id="grabb-grad-main" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#00f5ff" />
+        <stop offset="35%" stop-color="#00ff88" />
+        <stop offset="70%" stop-color="#bf5af2" />
+        <stop offset="100%" stop-color="#ff0077" />
+      </linearGradient>
+      <linearGradient id="grabb-core-grad" x1="12" y1="12" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="#ffffff" />
+        <stop offset="100%" stop-color="#00f0ff" />
+      </linearGradient>
+    </defs>
+  </svg>
+
   <!-- Antigravity-style Particle Canvas -->
   <canvas id="particleCanvas"></canvas>
 
@@ -1833,15 +2274,46 @@
 
   <!-- Mouse Interactive Spotlight Glow -->
   <div class="mouse-spotlight" id="mouseSpotlight"></div>
+  <!-- Dynamic Interactive Cursor RGB Halo with Watery Caustic Rings -->
+  <div class="cursor-rgb-halo" id="cursorRgbHalo"></div>
 
   <div class="grid-overlay"></div>
 
   <!-- Minimalist Apple Frosted Glass Header -->
   <header class="nav-bar">
     <div class="nav-content">
-      <a href="/" class="brand">
+      <a href="/" class="brand" title="Grabb Studio — Home">
         <div class="brand-logo">
-          <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          <div class="logo-inner-glass"></div>
+          <!-- Custom Grabb Cyber-Claw Logo with Glitch Slices -->
+          <svg viewBox="0 0 32 32" class="grabb-logo-svg" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Cyan Glitch Ghost -->
+            <g class="glitch-layer glitch-cyan">
+              <path d="M 23 7 C 20.5 4.5 16.5 3.5 12.5 4.8 C 7.5 6.4 4 11 4 16 C 4 21.5 8 26.5 13.5 27.5 C 19 28.5 24 25.5 26 21 C 26.8 19 27 17.5 27 15.5 L 16 15.5" stroke="#00ffff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <polygon points="16,11 21,16 16,21 11,16" stroke="#00ffff" stroke-width="1.8" fill="none"/>
+            </g>
+
+            <!-- Magenta Glitch Ghost -->
+            <g class="glitch-layer glitch-magenta">
+              <path d="M 23 7 C 20.5 4.5 16.5 3.5 12.5 4.8 C 7.5 6.4 4 11 4 16 C 4 21.5 8 26.5 13.5 27.5 C 19 28.5 24 25.5 26 21 C 26.8 19 27 17.5 27 15.5 L 16 15.5" stroke="#ff0077" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <polygon points="16,11 21,16 16,21 11,16" stroke="#ff0077" stroke-width="1.8" fill="none"/>
+            </g>
+
+            <!-- Main Pristine Claw Emblem -->
+            <g class="logo-main-layer">
+              <!-- G-Claw Body -->
+              <path class="claw-arc" d="M 23 7 C 20.5 4.5 16.5 3.5 12.5 4.8 C 7.5 6.4 4 11 4 16 C 4 21.5 8 26.5 13.5 27.5 C 19 28.5 24 25.5 26 21 C 26.8 19 27 17.5 27 15.5 L 16 15.5" stroke="url(#grabb-grad-main)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+              
+              <!-- Articulated Grabber Pinchers -->
+              <path class="claw-pincher-top" d="M 23 7 L 18 10.5" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+              <path class="claw-pincher-bottom" d="M 24.5 22.5 L 19 18.5" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+              <path class="claw-pincher-mid" d="M 27 15.5 L 16 15.5" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round"/>
+              
+              <!-- Central Grabbed Quantum Data Gem -->
+              <polygon class="claw-gem" points="16,11 21,16 16,21 11,16" fill="url(#grabb-core-grad)" stroke="#ffffff" stroke-width="1.4"/>
+              <circle class="claw-core-dot" cx="16" cy="16" r="1.8" fill="#ffffff"/>
+            </g>
+          </svg>
         </div>
         <div class="brand-info">
           <span class="brand-title">Grabb Studio</span>
@@ -1906,8 +2378,13 @@
         <!-- Node 2: Core Quantum Engine -->
         <div class="center-wrapper">
           <div class="splash" id="splash"></div>
-          <div class="icon-node-center" id="node-x" title="Extraction & Rewriting Engine">
-            <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          <div class="icon-node-center" id="node-x" title="Grabb Core Extraction Engine">
+            <!-- Grabb Center Claw Emblem -->
+            <svg viewBox="0 0 32 32" class="node-grabb-icon" fill="none" style="width: 24px; height: 24px;">
+              <path d="M 23 7 C 20.5 4.5 16.5 3.5 12.5 4.8 C 7.5 6.4 4 11 4 16 C 4 21.5 8 26.5 13.5 27.5 C 19 28.5 24 25.5 26 21 C 26.8 19 27 17.5 27 15.5 L 16 15.5" stroke="url(#grabb-grad-main)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <polygon points="16,11 21,16 16,21 11,16" fill="url(#grabb-core-grad)" stroke="#ffffff" stroke-width="1.4"/>
+              <circle cx="16" cy="16" r="1.6" fill="#ffffff"/>
+            </svg>
           </div>
         </div>
 
@@ -2313,252 +2790,257 @@
     }
 
     // ═══════════════════════════════════════════════════════════
-    // Antigravity-style Canvas Particle Engine
-    // Colorful confetti-like particles drifting upward with glow
+    // Liquid Glass Light Refraction Engine
+    // Serene, minimal, monochromatic floating glass crystals & liquid drift
     // ═══════════════════════════════════════════════════════════
-    (function initParticleEngine() {
+    (function initLiquidGlassEngine() {
       const canvas = document.getElementById('particleCanvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
       let W, H;
       let mouseX = -9999, mouseY = -9999;
-      const MOUSE_RADIUS = 120;
-      const MOUSE_FORCE = 2.5;
+      let prevMouseX = -9999, prevMouseY = -9999;
+      let mouseVx = 0, mouseVy = 0;
+      let mouseActive = false;
+      const MOUSE_RADIUS = 160;
 
-      // Particle color palette (Antigravity-inspired: vibrant on dark)
-      const COLORS = [
-        // Greens (Spotify)
-        { r: 30, g: 215, b: 96 },
-        { r: 52, g: 211, b: 153 },
-        // Blues (Apple)
-        { r: 41, g: 151, b: 255 },
-        { r: 56, g: 139, b: 253 },
-        // Purples
-        { r: 94, g: 92, b: 230 },
-        { r: 191, g: 90, b: 242 },
-        // Pinks / Reds
-        { r: 255, g: 55, b: 95 },
-        { r: 251, g: 113, b: 133 },
-        // Amber / Orange
-        { r: 255, g: 214, b: 10 },
-        { r: 251, g: 146, b: 60 },
-        // Cyan
-        { r: 0, g: 210, b: 255 },
-        // White-ish (subtle sparkle)
-        { r: 200, g: 200, b: 220 },
+      // Monochromatic Liquid Glass Crystal Palette (Icy whites, translucent azures & silver)
+      const GLASS_PALETTE = [
+        { r: 255, g: 255, b: 255, name: 'crystal' },      // Pure Crystal White
+        { r: 215, g: 235, b: 255, name: 'ice' },          // Liquid Ice Blue
+        { r: 185, g: 215, b: 255, name: 'azure' },        // Soft Azure Refraction
+        { r: 195, g: 205, b: 225, name: 'frosted-silver' }// Frosted Glass Silver
       ];
 
-      // Shape types: 0=circle, 1=rect, 2=dash/line, 3=triangle, 4=diamond
-      const SHAPE_COUNT = 5;
-      const PARTICLE_COUNT = 85; // not too dense, premium feel
+      // Subtle & elegant density (serene, never overwhelming)
+      const PARTICLE_COUNT = 68;
 
       function resize() {
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         W = window.innerWidth;
         H = window.innerHeight;
-        canvas.width = W * dpr;
-        canvas.height = H * dpr;
+        canvas.width = Math.floor(W * dpr);
+        canvas.height = Math.floor(H * dpr);
         canvas.style.width = W + 'px';
         canvas.style.height = H + 'px';
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
 
       function rand(min, max) { return min + Math.random() * (max - min); }
-      function randInt(min, max) { return Math.floor(rand(min, max + 1)); }
+      function randChoice(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-      class Particle {
-        constructor() {
-          this.reset(true);
+      // Smooth solenoidal stream potential for gentle liquid currents
+      function streamPotential(x, y, t) {
+        const s1 = 0.0009;
+        const s2 = 0.0018;
+        const wave1 = Math.sin(x * s1 + t * 0.0002) * Math.cos(y * s1 + t * 0.00015);
+        const wave2 = 0.4 * Math.sin((x + y) * s2 - t * 0.00025);
+        // Very slow, peaceful upward liquid buoyancy
+        return (wave1 + wave2) * 220 - 0.28 * x;
+      }
+
+      function getFlowVelocity(x, y, t) {
+        const eps = 2.0;
+        const vx = (streamPotential(x, y + eps, t) - streamPotential(x, y - eps, t)) / (2 * eps);
+        const vy = -(streamPotential(x + eps, y, t) - streamPotential(x - eps, y, t)) / (2 * eps);
+        return { vx, vy };
+      }
+
+      class LiquidGlassParticle {
+        constructor(initial = true) {
+          this.init(initial);
         }
 
-        reset(initial = false) {
-          const color = COLORS[randInt(0, COLORS.length - 1)];
-          this.r = color.r;
-          this.g = color.g;
-          this.b = color.b;
-          this.shape = randInt(0, SHAPE_COUNT - 1);
-          this.size = rand(2.5, 7);
-          this.rotation = rand(0, Math.PI * 2);
-          this.rotationSpeed = rand(-0.03, 0.03);
+        init(initial = false) {
+          const col = randChoice(GLASS_PALETTE);
+          this.r = col.r;
+          this.g = col.g;
+          this.b = col.b;
+
+          // Depth tier: 0 (background) to 1 (foreground)
+          this.depth = rand(0.15, 1);
+
+          // Geometry: sleek, delicate liquid glass pills
+          this.baseLength = rand(6, 14) * (0.6 + this.depth * 0.5);
+          this.length = this.baseLength;
+          this.thickness = (1.4 + this.depth * 1.3);
 
           if (initial) {
-            // Spread across entire viewport initially
             this.x = rand(0, W);
             this.y = rand(0, H);
           } else {
-            // Respawn from edges (bottom, left, or right)
-            const edge = Math.random();
-            if (edge < 0.6) {
-              // From bottom
-              this.x = rand(-50, W + 50);
-              this.y = H + rand(10, 80);
-            } else if (edge < 0.8) {
-              // From left
-              this.x = -rand(10, 60);
-              this.y = rand(0, H);
-            } else {
-              // From right
-              this.x = W + rand(10, 60);
-              this.y = rand(0, H);
+            this.x = rand(-20, W + 20);
+            this.y = H + rand(10, 40);
+          }
+
+          // Slow, gentle liquid drift speed (half speed of previous)
+          this.speedMultiplier = (0.24 + this.depth * 0.38) * rand(0.85, 1.15);
+          this.vx = rand(-0.1, 0.1);
+          this.vy = -this.speedMultiplier * 0.7;
+          this.angle = Math.atan2(this.vy, this.vx);
+
+          // Subtle translucent glass opacities
+          this.baseOpacity = (0.15 + this.depth * 0.35) * rand(0.75, 1.0);
+          this.opacity = initial ? this.baseOpacity : 0;
+          this.fadeIn = !initial;
+          this.glow = (2 + this.depth * 6);
+          this.interactBoost = 0;
+        }
+
+        update(time) {
+          const flow = getFlowVelocity(this.x, this.y, time);
+          const targetVx = flow.vx * this.speedMultiplier;
+          const targetVy = flow.vy * this.speedMultiplier;
+
+          // Smooth liquid inertia
+          this.vx += (targetVx - this.vx) * 0.025;
+          this.vy += (targetVy - this.vy) * 0.025;
+
+          // Soft Liquid Water Refraction around Cursor
+          if (mouseActive) {
+            const dx = this.x - mouseX;
+            const dy = this.y - mouseY;
+            const dist = Math.hypot(dx, dy);
+
+            if (dist < MOUSE_RADIUS && dist > 0) {
+              const normDist = 1 - dist / MOUSE_RADIUS;
+              const smoothFalloff = normDist * normDist * (3 - 2 * normDist);
+              const repelForce = smoothFalloff * 2.5;
+
+              // Gentle liquid swirl
+              const swirl = 1.2;
+              const tx = (-dy / dist) * swirl * repelForce;
+              const ty = (dx / dist) * swirl * repelForce;
+
+              this.vx += ((dx / dist) * repelForce + tx) * 0.12;
+              this.vy += ((dy / dist) * repelForce + ty) * 0.12;
+
+              this.vx += mouseVx * 0.04 * smoothFalloff;
+              this.vy += mouseVy * 0.04 * smoothFalloff;
+
+              this.interactBoost = Math.min(0.6, this.interactBoost + smoothFalloff * 0.2);
             }
           }
 
-          // Movement: upward drift with horizontal wander
-          this.vx = rand(-0.4, 0.4);
-          this.vy = rand(-0.8, -0.2);
-          this.baseVx = this.vx;
-          this.baseVy = this.vy;
-
-          // Opacity and lifecycle
-          this.opacity = rand(0.3, 0.85);
-          this.targetOpacity = this.opacity;
-          this.fadeInProgress = 0;
-          this.life = rand(400, 900);
-          this.maxLife = this.life;
-
-          // Wobble (sinusoidal drift)
-          this.wobbleAmp = rand(0.2, 1.0);
-          this.wobbleFreq = rand(0.005, 0.02);
-          this.wobbleOffset = rand(0, Math.PI * 2);
-          this.age = 0;
-
-          // Glow intensity
-          this.glowSize = rand(4, 12);
-        }
-
-        update() {
-          this.age++;
-
-          // Wobble (horizontal sway)
-          const wobble = Math.sin(this.age * this.wobbleFreq + this.wobbleOffset) * this.wobbleAmp;
-          this.vx = this.baseVx + wobble * 0.1;
-
-          // Mouse repulsion
-          const dx = this.x - mouseX;
-          const dy = this.y - mouseY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < MOUSE_RADIUS && dist > 0) {
-            const force = (1 - dist / MOUSE_RADIUS) * MOUSE_FORCE;
-            this.vx += (dx / dist) * force;
-            this.vy += (dy / dist) * force;
-          } else {
-            // Gradually return to base velocity
-            this.vx += (this.baseVx + wobble * 0.1 - this.vx) * 0.02;
-            this.vy += (this.baseVy - this.vy) * 0.02;
-          }
+          this.interactBoost *= 0.94;
 
           this.x += this.vx;
           this.y += this.vy;
-          this.rotation += this.rotationSpeed;
 
-          // Fade in
-          if (this.fadeInProgress < 1) {
-            this.fadeInProgress += 0.015;
+          // Smooth tangential orientation
+          const moveHeading = Math.atan2(this.vy, this.vx);
+          let diff = moveHeading - this.angle;
+          while (diff < -Math.PI) diff += Math.PI * 2;
+          while (diff > Math.PI) diff -= Math.PI * 2;
+          this.angle += diff * 0.1;
+
+          // Fade in on respawn
+          if (this.fadeIn) {
+            this.opacity += 0.015;
+            if (this.opacity >= this.baseOpacity) {
+              this.opacity = this.baseOpacity;
+              this.fadeIn = false;
+            }
           }
 
-          // Fade out near end of life
-          this.life--;
-          const lifeRatio = this.life / this.maxLife;
-          if (lifeRatio < 0.15) {
-            this.opacity = this.targetOpacity * (lifeRatio / 0.15);
-          } else {
-            this.opacity = this.targetOpacity * Math.min(this.fadeInProgress, 1);
-          }
-
-          // Reset if out of bounds or life expired
-          if (this.life <= 0 || this.y < -100 || this.x < -100 || this.x > W + 100) {
-            this.reset(false);
+          // Boundary wrapping
+          const pad = 40;
+          if (this.y < -pad) {
+            this.y = H + rand(10, 30);
+            this.x = rand(-20, W + 20);
+            this.fadeIn = true;
+            this.opacity = 0;
+          } else if (this.x < -pad) {
+            this.x = W + 10;
+          } else if (this.x > W + pad) {
+            this.x = -10;
           }
         }
 
         draw() {
           ctx.save();
           ctx.translate(this.x, this.y);
-          ctx.rotate(this.rotation);
-          ctx.globalAlpha = this.opacity;
+          ctx.rotate(this.angle);
 
-          // Glow effect
-          ctx.shadowColor = `rgba(${this.r}, ${this.g}, ${this.b}, 0.6)`;
-          ctx.shadowBlur = this.glowSize;
+          const finalAlpha = Math.min(0.8, this.opacity + this.interactBoost * 0.3);
+          ctx.globalAlpha = finalAlpha;
 
-          ctx.fillStyle = `rgb(${this.r}, ${this.g}, ${this.b})`;
+          // Soft frosted glass halo
+          const glowSize = this.glow + this.interactBoost * 8;
+          ctx.shadowColor = `rgba(${this.r}, ${this.g}, ${this.b}, ${0.35 + this.interactBoost * 0.3})`;
+          ctx.shadowBlur = glowSize;
 
-          const s = this.size;
+          // Render liquid glass capsule
+          ctx.beginPath();
+          ctx.lineCap = 'round';
+          ctx.lineWidth = this.thickness + this.interactBoost * 0.6;
+          ctx.strokeStyle = `rgba(${this.r}, ${this.g}, ${this.b}, ${finalAlpha})`;
 
-          switch (this.shape) {
-            case 0: // Circle
-              ctx.beginPath();
-              ctx.arc(0, 0, s, 0, Math.PI * 2);
-              ctx.fill();
-              break;
-            case 1: // Rectangle
-              ctx.fillRect(-s * 0.7, -s * 0.7, s * 1.4, s * 1.4);
-              break;
-            case 2: // Dash / Line (confetti strip)
-              ctx.fillRect(-s * 1.8, -s * 0.35, s * 3.6, s * 0.7);
-              break;
-            case 3: // Triangle
-              ctx.beginPath();
-              ctx.moveTo(0, -s);
-              ctx.lineTo(-s * 0.87, s * 0.5);
-              ctx.lineTo(s * 0.87, s * 0.5);
-              ctx.closePath();
-              ctx.fill();
-              break;
-            case 4: // Diamond
-              ctx.beginPath();
-              ctx.moveTo(0, -s);
-              ctx.lineTo(s * 0.6, 0);
-              ctx.lineTo(0, s);
-              ctx.lineTo(-s * 0.6, 0);
-              ctx.closePath();
-              ctx.fill();
-              break;
-          }
+          const halfLen = this.length * 0.5;
+          ctx.moveTo(-halfLen, 0);
+          ctx.lineTo(halfLen, 0);
+          ctx.stroke();
 
           ctx.restore();
         }
       }
 
       let particles = [];
+      let startTime = performance.now();
 
       function init() {
         resize();
         particles = [];
         for (let i = 0; i < PARTICLE_COUNT; i++) {
-          particles.push(new Particle());
+          particles.push(new LiquidGlassParticle(true));
         }
       }
 
-      function loop() {
+      function loop(now) {
+        const time = (now - startTime);
         ctx.clearRect(0, 0, W, H);
-        for (const p of particles) {
-          p.update();
-          p.draw();
+
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].update(time);
+          particles[i].draw();
         }
+
+        // Damp mouse velocity
+        mouseVx *= 0.85;
+        mouseVy *= 0.85;
+
         requestAnimationFrame(loop);
       }
 
       init();
-      loop();
+      requestAnimationFrame(loop);
 
-      // Debounced resize
       let resizeTimeout;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          resize();
-        }, 150);
+        resizeTimeout = setTimeout(resize, 120);
       });
 
-      // Track mouse for particle repulsion AND spotlight
       window.addEventListener('pointermove', e => {
+        if (prevMouseX !== -9999) {
+          mouseVx = e.clientX - prevMouseX;
+          mouseVy = e.clientY - prevMouseY;
+        }
+        prevMouseX = e.clientX;
+        prevMouseY = e.clientY;
         mouseX = e.clientX;
         mouseY = e.clientY;
+        mouseActive = true;
       });
+
       window.addEventListener('pointerleave', () => {
+        mouseActive = false;
         mouseX = -9999;
         mouseY = -9999;
+        prevMouseX = -9999;
+        prevMouseY = -9999;
+        mouseVx = 0;
+        mouseVy = 0;
       });
     })();
 
@@ -2574,6 +3056,114 @@
         spotlight.style.opacity = '0';
       });
     }
+
+    // ═══════════════════════════════════════════════════════════
+    // RGB Chromatic Cursor Halo — follows mouse, lights up on hover
+    // ═══════════════════════════════════════════════════════════
+    (function initRgbHalo() {
+      const halo = document.getElementById('cursorRgbHalo');
+      if (!halo) return;
+
+      // Keep halo centred on cursor at all times
+      window.addEventListener('pointermove', e => {
+        halo.style.left = e.clientX + 'px';
+        halo.style.top  = e.clientY + 'px';
+      });
+
+      // Selectors for interactive elements (excluding search input box so text stays clear)
+      const INTERACTIVE = [
+        'button', 'a', '.btn-submit', '.preset-chip', '.tab-btn',
+        '.btn', '.btn-action', '.icon-node',
+        '.icon-node-center', '.brand-logo', '.brand', '.history-card',
+        'select', '.clickable', '.card-clickable', 'label'
+      ].join(',');
+
+      // Activate glow when entering interactive elements, but keep it OFF over search box
+      document.addEventListener('pointerover', e => {
+        if (e.target.closest('.command-box, .command-input, .hero-form')) {
+          halo.classList.remove('active');
+          return;
+        }
+        if (e.target.closest(INTERACTIVE)) {
+          halo.classList.add('active');
+        }
+      }, { passive: true });
+
+      // Deactivate when leaving
+      document.addEventListener('pointerout', e => {
+        if (e.target.closest(INTERACTIVE)) {
+          halo.classList.remove('active');
+        }
+      }, { passive: true });
+
+      // Safety: hide when pointer exits viewport
+      document.addEventListener('pointerleave', () => {
+        halo.classList.remove('active');
+      });
+    })();
+
+    // ═══════════════════════════════════════════════════════════
+    // 10/10 Beauty Polish: Dynamic Specular Reflection Tracking
+    // & Magnetic Apple-style Tactile Spring Physics
+    // ═══════════════════════════════════════════════════════════
+    (function initLiquidGlassInteractions() {
+      // 1. Dynamic Cursor-Tracking Specular Glass Coordinates
+      const glassElements = document.querySelectorAll(
+        '.command-box, .btn-submit, .hero-pill, .preset-chip, .icon-node, .icon-node-center, .brand-logo'
+      );
+
+      glassElements.forEach(el => {
+        el.addEventListener('pointermove', e => {
+          const rect = el.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          el.style.setProperty('--mouse-x', `${x}px`);
+          el.style.setProperty('--mouse-y', `${y}px`);
+        });
+      });
+
+      // 2. Dynamic Watery Ripple & Glitch Turbulence Modulation on Hover
+      const glitchTurb = document.getElementById('glitchTurbulence');
+      const rippleTurb = document.getElementById('rippleTurbulence');
+      
+      const wateryTargets = document.querySelectorAll('.command-box, .brand-logo, .brand, .btn-submit');
+      wateryTargets.forEach(el => {
+        el.addEventListener('pointermove', e => {
+          const rect = el.getBoundingClientRect();
+          const relX = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+          const relY = Math.max(0, Math.min(1, (e.clientY - rect.top) / rect.height));
+          
+          if (glitchTurb) {
+            const fx = (0.025 + relX * 0.06).toFixed(3);
+            const fy = (0.06 + relY * 0.1).toFixed(3);
+            glitchTurb.setAttribute('baseFrequency', `${fx} ${fy}`);
+          }
+          if (rippleTurb) {
+            const rx = (0.018 + relX * 0.035).toFixed(3);
+            const ry = (0.035 + relY * 0.05).toFixed(3);
+            rippleTurb.setAttribute('baseFrequency', `${rx} ${ry}`);
+          }
+        });
+      });
+
+      // 3. Magnetic Tactile Spring Physics (Apple visionOS / macOS cursor pull)
+      const magneticElements = document.querySelectorAll('.btn-submit, .preset-chip');
+      magneticElements.forEach(item => {
+        item.addEventListener('pointermove', e => {
+          const rect = item.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          const pullStrength = item.classList.contains('btn-submit') ? 0.28 : 0.2;
+          const deltaX = (e.clientX - centerX) * pullStrength;
+          const deltaY = (e.clientY - centerY) * pullStrength;
+          item.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.03)`;
+        });
+
+        item.addEventListener('pointerleave', () => {
+          item.style.transform = '';
+        });
+      });
+    })();
 
     // Preset chips click handlers
     document.querySelectorAll('.preset-chip').forEach(btn => {
